@@ -16,7 +16,7 @@ frontend:
     httpGet:
       path: /
       port: http
-  resources: {}
+  resources: {} # Not specifying any default resources to let it up to the deployer!
 
   # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
   autoscaling:
@@ -83,3 +83,14 @@ ingress:
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+postgresql:
+  enabled: true # Set this to false if you would like an externally-managed or clustered postgres
+  architecture: "standalone"
+  auth:
+    enablePostgresUser: true # defaults to make admin `postgres` user
+    existingSecret: "group-ironmen-db-secret"
+    secretKeys:
+      adminPasswordKey: "postgres-password"
+  primary:
+    resources: {} # Not specifying any default resources to let it up to the deployer!
