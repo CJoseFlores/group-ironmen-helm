@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "group-ironmen.fullname" . }}-frontned
+  name: {{ include "group-ironmen.fullname" . }}-frontend
   labels:
     {{- include "group-ironmen.labels" . | nindent 4 }}
 spec:
