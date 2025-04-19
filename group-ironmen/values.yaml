@@ -1,14 +1,15 @@
 # Default values for group-ironmen.
-replicaCount: 1
 
 frontend:
   image:
     repository: chrisleeeee/group-ironmen-tracker-frontend
     pullPolicy: Always
     tag: ""  # Overrides the image tag whose default is the chart appVersion.
+  replicaCount: 1
   service:
     type: ClusterIP
     port: 4000
+  hostUrl: http://localhost:5000 # Set to the URL (including http// or https://) of the backend. This is used for API calls from the frontend.
   # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
   livenessProbe:
     enabled: false

@@ -6,7 +6,7 @@ metadata:
     {{- include "group-ironmen.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.frontend.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.frontend.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
@@ -58,6 +58,9 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          env:
+            - name: HOST_URL
+              value: {{- .Values.frontend.hostUrl | quote }}
       {{- with .Values.frontend.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
