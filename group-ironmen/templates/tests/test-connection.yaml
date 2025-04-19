@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "group-ironmen.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "group-ironmen.fullname" . }}:{{ .Values.frontend.service.port }}']
   restartPolicy: Never

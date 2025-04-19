@@ -37,7 +37,7 @@ spec:
               service:
                 name: {{ include "group-ironmen.fullname" $ }}
                 port:
-                  number: {{ $.Values.service.port }}
+                  number: {{ $.Values.frontend.service.port }}
           {{- end }}
     {{- end }}
 {{- end }}
