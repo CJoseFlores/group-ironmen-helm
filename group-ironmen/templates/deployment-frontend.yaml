@@ -60,7 +60,7 @@ spec:
           {{- end }}
           env:
             - name: HOST_URL
-              value: {{- .Values.frontend.hostUrl | quote }}
+              value: {{ .Values.frontend.hostUrl | quote }}
       {{- with .Values.frontend.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
