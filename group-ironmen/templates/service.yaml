@@ -4,6 +4,10 @@ metadata:
   name: {{ include "group-ironmen.fullname" . }}
   labels:
     {{- include "group-ironmen.labels" . | nindent 4 }}
+  annotations:
+  {{- with .Values.service.annotations }}
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.frontend.service.type }}
   ports:

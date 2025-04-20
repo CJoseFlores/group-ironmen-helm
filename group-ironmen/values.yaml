@@ -50,6 +50,9 @@ frontend:
     # runAsNonRoot: true
   # runAsUser: 1000
 
+service:
+  annotations: {}
+
 imagePullSecrets: []
 # This is to override the chart name.
 nameOverride: ""
