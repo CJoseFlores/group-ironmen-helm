@@ -50,6 +50,67 @@ frontend:
     # runAsNonRoot: true
   # runAsUser: 1000
 
+backend:
+  image:
+    repository: chrisleeeee/group-ironmen-tracker-backend
+    pullPolicy: Always
+    tag: ""  # Overrides the image tag whose default is the chart appVersion.
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 8080
+  database:
+    user: postgres
+    host: "" # Default to the `group-ironmen.fullname`-postgresql (See _helpers.tpl)
+    port: 5432
+    db: groupironman_db
+    password:
+      secretName: "group-ironmen-db-secret"
+      secretKey: "postgres-password"
+  hashSecret:
+    name: "group-ironmen-backend-hash-secret"
+    key: "hash-seed"
+  rustBackTrace: 0
+  # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  livenessProbe:
+    enabled: false
+    httpGet:
+      path: /
+      port: http
+  resources: {} # Not specifying any default resources to let it up to the deployer!
+
+  # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  # Additional volumes on the output Deployment definition.
+  volumes: []
+
+  # Additional volumeMounts on the output Deployment definition.
+  volumeMounts: []
+
+  # This is for setting Kubernetes Annotations to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podAnnotations: {}
+  # This is for setting Kubernetes Labels to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  podLabels: {}
+
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
 service:
   annotations: {}
 
